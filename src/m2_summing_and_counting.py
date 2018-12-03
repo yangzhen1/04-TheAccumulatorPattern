@@ -8,9 +8,9 @@ in another classic form:
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher, Mark Hays,
-         Aaron Wilkin, their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
-
+         Aaron Wilkin, their colleagues, and Zhen Yang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+import math
 
 # -----------------------------------------------------------------------------
 # Students: As you work each of these problems, ask yourself:
@@ -58,7 +58,7 @@ def run_test_sum_more_cosines():
     print('--------------------------------------------------')
 
     # Test 1:
-    expected = 0.13416  # This is APPROXIMATELY the correct answer.
+    expected = 0.13416
     answer = sum_more_cosines(0, 3)
     print('Test 1 expected:', expected, '(approximately)')
     if answer is not None:
@@ -67,12 +67,30 @@ def run_test_sum_more_cosines():
         print('       actual:  ', answer)
 
     # -------------------------------------------------------------------------
-    # TODO: 2 (continued).
+    # DONE: 2 (continued).
     # Below this comment, add 2 more test cases of your own choosing.
     # -------------------------------------------------------------------------
+    expected = 0.02082
+    answer = sum_more_cosines(-4, 1)
+    print('Test 2 expected:', expected, '(approximately)')
+    if answer is not None:
+        print('       actual:  ', round(answer, 5))
+    else:
+        print('       actual:  ', answer)
 
+    expected = 0.54030
+    answer = sum_more_cosines(0, 1)
+    print('Test 3 expected:', expected, '(approximately)')
+    if answer is not None:
+        print('       actual:  ', round(answer, 5))
+    else:
+        print('       actual:  ', answer)
 
 def sum_more_cosines(m, n):
+    total = 0
+    for k in range(n + 1 - m):
+        total = total + math.cos(k + m)
+    return total
     """
     What comes in:  Integers m and n, with m <= n.
     What goes out:  Returns the sum
@@ -87,7 +105,7 @@ def sum_more_cosines(m, n):
          which is approximately 0.02082.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #   That is called TEST-DRIVEN DEVELOPMENT (TDD).
     #
@@ -121,6 +139,31 @@ def run_test_count_sines_from():
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
+    expected = 3
+    answer = count_sines_from(4, 6)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 0
+    answer = count_sines_from(7, 7)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 1
+    answer = count_sines_from(9, 9)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 1
+    answer = count_sines_from(7, 9)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 3
+    answer = count_sines_from(4, 7)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
+
     # -------------------------------------------------------------------------
     # TODO: 4 (continued).
     # Below this comment, add 5 more test cases of your own choosing.
@@ -128,6 +171,12 @@ def run_test_count_sines_from():
 
 
 def count_sines_from(m, n):
+    count = 0
+    for k in range(n):
+        if math.sin(n + 1 - m) < 0.5:
+            count = count + 1
+    return count
+
     """
     What comes in:  Integers m and n, with m <= n.
     What goes out:  Returns the number of integers from m to n,
