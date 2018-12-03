@@ -172,8 +172,8 @@ def run_test_count_sines_from():
 
 def count_sines_from(m, n):
     count = 0
-    for k in range(n):
-        if math.sin(n + 1 - m) < 0.5:
+    for k in range(n + 1 - m):
+        if math.sin(k + m) < 0.5:
             count = count + 1
     return count
 
@@ -196,7 +196,7 @@ def count_sines_from(m, n):
       -- count_sines_from(9, 9)  returns  1
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPORTANT: As in previous problems in this session,
@@ -226,6 +226,31 @@ def run_test_count_sines_vs_cosines():
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
+    expected = 100
+    answer = count_sines_vs_cosines(101)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 100
+    answer = count_sines_vs_cosines(101)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 100
+    answer = count_sines_vs_cosines(101)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 100
+    answer = count_sines_vs_cosines(101)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 100
+    answer = count_sines_vs_cosines(101)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
+
     # -------------------------------------------------------------------------
     # TODO: 6 (continued).
     # Below this comment, add 5 more test cases of your own choosing.
@@ -233,6 +258,13 @@ def run_test_count_sines_vs_cosines():
 
 
 def count_sines_vs_cosines(m):
+    count = 0
+    for k in range(-m, m):
+        if math.sin(m) > math.cos(m):
+            count = count + 1
+
+    return count
+
     """
     What comes in:  A non-negative integer m.
     What goes out:  Returns the number of integers from -m to m,
