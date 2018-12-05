@@ -45,31 +45,30 @@ def run_test_draw_squares_from_circle():
     # -------------------------------------------------------------------------
     title = 'Tests 1 and 2 of DRAW_SQUARES_FROM_CIRCLE: '
     title = title + ' 7 little squares from green circle, 4 big squares'
-    window1 = rg.RoseWindow(650, 350, title)
+    window11 = rg.RoseWindow(650, 350, title)
 
     # Test 1:
     circle = rg.Circle(rg.Point(100, 100), 20)
     circle.fill_color = 'green'
-    draw_squares_from_circle(7, circle, window1)
+    draw_squares_from_circle(7, circle, window11)
 
     # Test 2:
     circle = rg.Circle(rg.Point(350, 70), 50)
-    draw_squares_from_circle(4, circle, window1)
-    window1.close_on_mouse_click()
+    draw_squares_from_circle(4, circle, window11)
+    window11.close_on_mouse_click()
 
     # -------------------------------------------------------------------------
     # A third test on ANOTHER window.
     # -------------------------------------------------------------------------
     title = 'Test 3 of DRAW_SQUARES_FROM_CIRCLE: '
     title += ' 20 teeny squares from blue circle!'
-    window2 = rg.RoseWindow(525, 300, title)
+    window22 = rg.RoseWindow(525, 300, title)
 
     # Test 3:
     circle = rg.Circle(rg.Point(50, 50), 10)
     circle.fill_color = 'blue'
-    draw_squares_from_circle(20, circle, window2)
-
-    window2.close_on_mouse_click()
+    draw_squares_from_circle(20, circle, window22)
+    window22.close_on_mouse_click()
 
 
 def draw_squares_from_circle(n, circle, window):
@@ -134,14 +133,18 @@ def run_test_draw_circles_from_rectangle():
 
     title = 'Tests 1 and 2 of Draw_circles_from_rectangle(): '
     title = title + ' 7 little squares from green circle, 4 big squares'
-    window1 = rg.RoseWindow(650, 350, title)
+    window1 = rg.RoseWindow(720, 500, title)
 
     # Test 1:
-    rectangle = rg.Rectangle(rg.Point(100, 100), 20)
-    draw_circles_from_rectangle(7, 4, rectangle, window1)
+    rectangle = rg.Rectangle(rg.Point(400, 250), rg.Point(440, 325))
+    rectangle.fill_color = 'green'
+    rectangle.outline_color = 'black'
+    draw_circles_from_rectangle(4, 5, rectangle, window1)
 
     # Test 2:
     rectangle = rg.Rectangle(rg.Point(350, 70), 50)
+    rectangle.fill_color = 'blue'
+    rectangle.outline_color = 'red'
     draw_circles_from_rectangle(4, 8, rectangle, window1)
     window1.close_on_mouse_click()
 
@@ -150,12 +153,13 @@ def run_test_draw_circles_from_rectangle():
     # -------------------------------------------------------------------------
     title = 'Test 3 of DRAW_SQUARES_FROM_CIRCLE: '
     title += ' 20 teeny squares from blue circle!'
-    window2 = rg.RoseWindow(525, 300, title)
+    window2 = rg.RoseWindow(620, 380, title)
 
     # Test 3:
-    rectangle = rg.Rectangle(rg.Point(50, 50), 10)
-    draw_circles_from_rectangle(20, 29, rectangle, window2)
-
+    rectangle = rg.Rectangle(rg.Point(375, 330), rg.Point(350, 280))
+    draw_circles_from_rectangle(6, 10, rectangle, window2)
+    rectangle.fill_color = 'yellow'
+    rectangle.outline_color = 'brown'
     window2.close_on_mouse_click()
 
     # -------------------------------------------------------------------------
@@ -175,6 +179,29 @@ def run_test_draw_circles_from_rectangle():
 
 def draw_circles_from_rectangle(m, n, rectangle, window):
     rectangle.attach_to(window)
+    halfwidth = rectangle.get_width() * 0.5
+    radius = 0.5 * rectangle.get_height()
+    midpointx = rectangle.get_center().x
+    midpointy = rectangle.get_center().y
+    circle4 = rg.Circle(midpointx - halfwidth - radius * 2, midpointy)
+    circle4.attach_to(window)
+    for k in range(m + 1):
+        circle = rg.Circle(midpointx - radius * 2 * (k+1), midpointy)
+        circle.attach_to(window)
+
+    halfheight = rectangle.get_height() * 0.5
+    radius2 = 0.5 * rectangle.get_width()
+    midpointx2 = rectangle.get_center().x
+    midpointy2 = rectangle.get_center().y
+    circle5 = rg.Circle(midpointx2, midpointy2 - halfheight - radius2)
+    circle5.attach_to(window)
+    for k in range(n + 1):
+        circle = rg.Circle(midpointx2, midpointy2 - radius2 * 2 * (k+1))
+        circle.attach_to(window)
+    window.render()
+
+
+
 
 
     """
@@ -272,6 +299,31 @@ def run_test_draw_lines_from_rectangles():
 
 
 def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
+    rectangle1.attach_to(window)
+    rectangle2.attach_to(window)
+    aa_center_x = rectangle1.get_center().x
+    aa_center_y = rectangle1.get_center().y
+    aa_width = rectangle1.get_width() * 0.5
+    aa_height = rectangle1.get_height() * 0.5
+
+    bb_center_x = rectangle2.get_center().x
+    bb_center_y = rectangle2.get_center().y
+    bb_width = rectangle2.get_width() * 0.5
+    bb_height = rectangle2.get_height() * 0.5
+
+    line1 = rg.Line(rg.Point(aa_center_x, aa_center_y), rg.Point(bb_center_x, bb_center_y))
+    line1.color = rectangle1.outline_color
+    line1.attach_to(window)
+    for k in range(n):
+        line2 = rg.Line(rg.Point(aa_center_x - (k * aa_width), aa_center_y + (k * aa_height)), rg.Point(bb_center_x - ((k) * aa_width), bb_center_y + ((k) * aa_height)))
+        line2.attach_to(window)
+    window.render()
+
+
+
+
+
+
     """
     What comes in:  Four arguments:
       -- Two rg.Rectangles.
